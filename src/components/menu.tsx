@@ -22,6 +22,9 @@ export const Menu: Component = () => {
       <div>
         <A href="/member">Member List</A>
       </div>
+      <div>
+        <A href="/summary">Summary</A>
+      </div>
       {auth.user() && (
         <>
           <div>
