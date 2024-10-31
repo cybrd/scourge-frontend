@@ -1,22 +1,29 @@
-import { A, useSearchParams } from "@solidjs/router";
 import { Button, Modal } from "solid-bootstrap";
 import { Index, createResource, createSignal, useContext } from "solid-js";
 import toast, { Toaster } from "solid-toast";
+import { useSearchParams } from "@solidjs/router";
 
-import { TEN, ZERO } from "../../constants";
-import { activityDelete, activityList } from "../../services/activity";
+import {
+  memberActivityDelete,
+  memberActivityList,
+} from "../../services/member-activity";
 import { AuthContext } from "../../context/auth";
 import { Query } from "../../models/query";
-import { pagination } from "../helper/pagination";
 import { setParamsAndOptions } from "../helper/params";
 
 export const Members = () => {
   const [show, setShow] = createSignal(false);
   const [modalMessage, setModalMessage] = createSignal("");
-  const [modalId, setModalId] = createSignal("");
-  const handleOpen = (message: string, id: string) => {
+  const [activityId, setActivityId] = createSignal("");
+  const [memberId, setMemberId] = createSignal("");
+  const handleOpen = (
+    message: string,
+    activityIdParam: string,
+    memberIdParam: string
+  ) => {
     setModalMessage(message);
-    setModalId(id);
+    setActivityId(activityIdParam);
+    setMemberId(memberIdParam);
     setShow(true);
   };
   const handleClose = () => setShow(false);
@@ -30,20 +37,24 @@ export const Members = () => {
     query,
     token: auth.user()?.token || "",
   });
-  const [data] = createResource(() => options(), activityList);
+  const [data] = createResource(() => options(), memberActivityList);
 
-  const handleDelete = (id: string) => {
+  const handleDelete = (activityIdParam: string, memberIdParam: string) => {
     toast
-      .promise(activityDelete(id, auth.user()?.token), {
-        error: "An error occurred 😔",
-        loading: "Loading",
-        success: <b>Deleted</b>,
-      })
+      .promise(
+        memberActivityDelete(
+          activityIdParam,
+          memberIdParam,
+          auth.user()?.token
+        ),
+        {
+          error: "An error occurred 😔",
+          loading: "Loading",
+          success: <b>Deleted</b>,
+        }
+      )
       .then(() => {
-        setParamsAndOptions(
-          setOptions,
-          setParams
-        )({ page: params.page || "1" });
+        setParamsAndOptions(setOptions, setParams)({});
         handleClose();
       })
       .catch(console.error);
@@ -54,25 +65,15 @@ export const Members = () => {
       <table class="table table-striped table-hover table-bordered">
         <thead class="sticky-top bg-white p-2">
           <tr>
-            <th>Name</th>
-            <th>Date</th>
-            <th>Points</th>
-            <th>Member Count</th>
+            <th>Ingame Name</th>
             <th>-</th>
           </tr>
         </thead>
         <tbody>
-          <Index each={data()?.data}>
+          <Index each={data()}>
             {(item) => (
               <tr>
-                <td>{item().name}</td>
-                <td>{item().activity_date.substring(ZERO, TEN)}</td>
-                <td>{item().points}</td>
-                <td>
-                  <A href={`/activity/${item().id}/members`}>
-                    {item().member_count}
-                  </A>
-                </td>
+                <td>{item().ingame_name}</td>
                 <td>
                   {auth.user() && (
                     <div>
@@ -81,7 +82,8 @@ export const Members = () => {
                         onClick={() =>
                           handleOpen(
                             `${item().activity_date} ${item().name}`,
-                            item().id
+                            item().activity_id,
+                            item().member_id
                           )
                         }
                       >
@@ -89,18 +91,12 @@ export const Members = () => {
                       </a>
                     </div>
                   )}
-                  <div>
-                    <A href={`/activity/${item().id}?${options().query}`}>
-                      Update
-                    </A>
-                  </div>
                 </td>
               </tr>
             )}
           </Index>
         </tbody>
       </table>
-      {pagination(setParamsAndOptions(setOptions, setParams), data()?.counts)}
 
       <Modal show={show()} onHide={handleClose} centered>
         <Modal.Header closeButton>
@@ -111,7 +107,10 @@ export const Members = () => {
           <Button variant="secondary" onClick={handleClose}>
             Cancel
           </Button>
-          <Button variant="primary" onClick={() => handleDelete(modalId())}>
+          <Button
+            variant="primary"
+            onClick={() => handleDelete(activityId(), memberId())}
+          >
             Delete
           </Button>
         </Modal.Footer>
