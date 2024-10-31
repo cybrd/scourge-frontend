@@ -1,5 +1,5 @@
 export type Query = {
   token: string;
-  query: string;
+  query?: string;
   id?: string;
 };

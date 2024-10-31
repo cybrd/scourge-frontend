@@ -35,7 +35,6 @@ export const Members = () => {
   const params = useParams();
   const [options] = createSignal<Query>({
     id: params.id,
-    query: "",
     token: auth.user()?.token || "",
   });
   const [data] = createResource(() => options(), memberActivityList);

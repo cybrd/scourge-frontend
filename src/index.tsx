@@ -13,6 +13,7 @@ import { Login } from "./components/login";
 import { Logout } from "./components/logout";
 
 import { Activity } from "./components/activity";
+import { Member } from "./components/member";
 
 const root = document.getElementById("root") as HTMLElement;
 
@@ -34,6 +35,7 @@ render(
             <Route component={Protected}>
               <Route path="/" component={Home} />
               <Activity />
+              <Member />
             </Route>
           </AuthProvider>
         </Router>
