@@ -5,4 +5,5 @@ export type Activity = {
   points: number;
   created_timestamp: string;
   updated_timestamp: string;
+  member_count?: number;
 };

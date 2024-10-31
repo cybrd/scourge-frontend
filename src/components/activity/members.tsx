@@ -10,7 +10,7 @@ import { Query } from "../../models/query";
 import { pagination } from "../helper/pagination";
 import { setParamsAndOptions } from "../helper/params";
 
-export const List = () => {
+export const Members = () => {
   const [show, setShow] = createSignal(false);
   const [modalMessage, setModalMessage] = createSignal("");
   const [modalId, setModalId] = createSignal("");
