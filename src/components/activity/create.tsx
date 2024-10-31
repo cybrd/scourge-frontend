@@ -9,7 +9,7 @@ import { activityCreate } from "../../services/activity";
 const inputName = (setFields: SetStoreFunction<Partial<Activity>>) => (
   <div class="form-group row p-1 align-items-center">
     <label for="inputName" class="col-sm-2 form-label text-end">
-      Finger Print Id
+      Name
     </label>
     <div class="col-sm-4">
       <input
