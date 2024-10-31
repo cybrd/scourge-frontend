@@ -13,7 +13,7 @@ const inputDiscordName = (
 ) => (
   <div class="form-group row p-1 align-items-center">
     <label for="inputDiscordName" class="col-sm-2 form-label text-end">
-      Name
+      Discord Name
     </label>
     <div class="col-sm-4">
       <input
@@ -32,7 +32,7 @@ const inputIngameName = (
 ) => (
   <div class="form-group row p-1 align-items-center">
     <label for="inputIngameName" class="col-sm-2 form-label text-end">
-      Name
+      Ingame Name
     </label>
     <div class="col-sm-4">
       <input
