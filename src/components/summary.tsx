@@ -1,8 +1,29 @@
-import { Index, createResource, createSignal, useContext } from "solid-js";
+import {
+  Index,
+  ParentComponent,
+  createResource,
+  createSignal,
+  useContext,
+} from "solid-js";
+import { Route } from "@solidjs/router";
+import { Title } from "@solidjs/meta";
 
 import { AuthContext } from "../context/auth";
 import { Query } from "../models/query";
 import { summary } from "../services/summary";
+
+export const Summary = () => (
+  <Route path="/summary" component={SummaryWrapper}>
+    <Route path="/" component={List} />
+  </Route>
+);
+
+export const SummaryWrapper: ParentComponent = (props) => (
+  <div>
+    <Title>Activity</Title>
+    {props.children}
+  </div>
+);
 
 export const List = () => {
   const auth = useContext(AuthContext);
