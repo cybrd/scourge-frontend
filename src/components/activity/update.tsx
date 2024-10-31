@@ -70,8 +70,6 @@ export const Update = () => {
   const params = useParams();
   const [searchParams] = useSearchParams();
   const query = new URLSearchParams({
-    department: searchParams.department || "",
-    fingerPrintId: searchParams.fingerPrintId || "",
     page: searchParams.page || "",
   }).toString();
   const navigate = useNavigate();
@@ -103,8 +101,8 @@ export const Update = () => {
       <div>
         <form id="form" onSubmit={submit}>
           {inputName(data, setFields)}
-          {inputPoints(data, setFields)}
           {inputDate(data, setFields)}
+          {inputPoints(data, setFields)}
 
           <div class="col-sm-6 text-center">
             <button type="submit" class="btn btn-primary">

@@ -79,8 +79,8 @@ export const Create = () => {
     <div>
       <form id="form" onSubmit={submit}>
         {inputName(setFields)}
-        {inputPoints(setFields)}
         {inputDate(setFields)}
+        {inputPoints(setFields)}
 
         <div class="col-sm-6 text-center">
           <button type="submit" class="btn btn-primary">
