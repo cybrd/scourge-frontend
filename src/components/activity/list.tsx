@@ -3,6 +3,7 @@ import { Button, Modal } from "solid-bootstrap";
 import { Index, createResource, createSignal, useContext } from "solid-js";
 import toast, { Toaster } from "solid-toast";
 
+import { TEN, ZERO } from "../../constants";
 import { activityDelete, activityList } from "../../services/activity";
 import { AuthContext } from "../../context/auth";
 import { Query } from "../../models/query";
@@ -64,7 +65,7 @@ export const List = () => {
             {(item) => (
               <tr>
                 <td>{item().name}</td>
-                <td>{item().activity_date}</td>
+                <td>{item().activity_date.substring(ZERO, TEN)}</td>
                 <td>{item().points}</td>
                 <td>
                   {auth.user() && (
