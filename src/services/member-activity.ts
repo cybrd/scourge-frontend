@@ -4,7 +4,7 @@ import { MemberActivityFull } from "../models/member-activity";
 import { Query } from "../models/query";
 
 export const memberActivityList = (options: Query) =>
-  fetch(`${import.meta.env.VITE_API_SERVER}/activity/${options.id}/member`, {
+  fetch(`${import.meta.env.VITE_API_SERVER}/member-activity/${options.id}`, {
     headers: {
       Authorization: `Bearer ${options.token}`,
       "Content-Type": "application/json",
@@ -25,7 +25,7 @@ export const memberActivityDelete = (
   fetch(
     `${
       import.meta.env.VITE_API_SERVER
-    }/activity/${activityId}/member/${memberId}`,
+    }/member-activity/${activityId}/${memberId}`,
     {
       headers: { Authorization: `Bearer ${token}` },
       method: "DELETE",
@@ -43,7 +43,7 @@ export const memberActivityCreate = (
   memberIds: string[],
   token = ""
 ) =>
-  fetch(`${import.meta.env.VITE_API_SERVER}/activity/${activityId}/member`, {
+  fetch(`${import.meta.env.VITE_API_SERVER}/member-activity/${activityId}`, {
     body: JSON.stringify(memberIds),
     headers: {
       Authorization: `Bearer ${token}`,
