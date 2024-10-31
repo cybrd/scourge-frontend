@@ -14,15 +14,9 @@ import { setParamsAndOptions } from "../helper/params";
 export const Members = () => {
   const [show, setShow] = createSignal(false);
   const [modalMessage, setModalMessage] = createSignal("");
-  const [activityId, setActivityId] = createSignal("");
   const [memberId, setMemberId] = createSignal("");
-  const handleOpen = (
-    message: string,
-    activityIdParam: string,
-    memberIdParam: string
-  ) => {
+  const handleOpen = (message: string, memberIdParam: string) => {
     setModalMessage(message);
-    setActivityId(activityIdParam);
     setMemberId(memberIdParam);
     setShow(true);
   };
@@ -30,20 +24,18 @@ export const Members = () => {
 
   const auth = useContext(AuthContext);
   const [params, setParams] = useSearchParams();
-  const query = new URLSearchParams({
-    page: params.page || "",
-  }).toString();
   const [options, setOptions] = createSignal<Query>({
-    query,
+    id: params.id,
+    query: "",
     token: auth.user()?.token || "",
   });
   const [data] = createResource(() => options(), memberActivityList);
 
-  const handleDelete = (activityIdParam: string, memberIdParam: string) => {
+  const handleDelete = (memberIdParam: string) => {
     toast
       .promise(
         memberActivityDelete(
-          activityIdParam,
+          params.id || "",
           memberIdParam,
           auth.user()?.token
         ),
@@ -82,7 +74,6 @@ export const Members = () => {
                         onClick={() =>
                           handleOpen(
                             `${item().activity_date} ${item().name}`,
-                            item().activity_id,
                             item().member_id
                           )
                         }
@@ -107,10 +98,7 @@ export const Members = () => {
           <Button variant="secondary" onClick={handleClose}>
             Cancel
           </Button>
-          <Button
-            variant="primary"
-            onClick={() => handleDelete(activityId(), memberId())}
-          >
+          <Button variant="primary" onClick={() => handleDelete(memberId())}>
             Delete
           </Button>
         </Modal.Footer>
