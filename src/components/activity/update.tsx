@@ -6,6 +6,7 @@ import { useNavigate, useParams, useSearchParams } from "@solidjs/router";
 import { activityGet, activityUpdate } from "../../services/activity";
 import { Activity } from "../../models/activity";
 import { AuthContext } from "../../context/auth";
+import moment from "moment";
 
 const inputName = (
   data: Resource<Activity>,
@@ -59,7 +60,7 @@ const inputDate = (
         type="date"
         class="form-control"
         onInput={(e) => setFields("activity_date", e.target.value)}
-        value={data()?.activity_date}
+        value={moment(data()?.activity_date).format("yyyy-mm-dd")}
       />
     </div>
   </div>
