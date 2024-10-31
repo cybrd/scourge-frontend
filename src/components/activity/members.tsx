@@ -84,7 +84,7 @@ export const Members = () => {
             href="#"
             onClick={() => handleCreateOpen("Add Members to this activity")}
           >
-            Delete
+            Add
           </a>
         </div>
       )}
@@ -163,7 +163,7 @@ export const Members = () => {
             Cancel
           </Button>
           <Button variant="primary" onClick={() => handleCreate()}>
-            Delete
+            Add
           </Button>
         </Modal.Footer>
       </Modal>
