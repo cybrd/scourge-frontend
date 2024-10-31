@@ -12,6 +12,8 @@ import { Home } from "./components/home";
 import { Login } from "./components/login";
 import { Logout } from "./components/logout";
 
+import { Activity } from "./components/activity";
+
 const root = document.getElementById("root") as HTMLElement;
 
 if (import.meta.env.DEV && !(root instanceof HTMLElement)) {
@@ -31,6 +33,7 @@ render(
 
             <Route component={Protected}>
               <Route path="/" component={Home} />
+              <Activity />
             </Route>
           </AuthProvider>
         </Router>
