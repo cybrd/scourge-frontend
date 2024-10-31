@@ -1,7 +1,7 @@
 import { Button, Modal } from "solid-bootstrap";
 import { Index, createResource, createSignal, useContext } from "solid-js";
 import toast, { Toaster } from "solid-toast";
-import { useParams, useSearchParams } from "@solidjs/router";
+import { useParams } from "@solidjs/router";
 
 import {
   memberActivityCreate,
@@ -10,7 +10,6 @@ import {
 } from "../../services/member-activity";
 import { AuthContext } from "../../context/auth";
 import { Query } from "../../models/query";
-import { setParamsAndOptions } from "../helper/params";
 
 export const Members = () => {
   const [modalMessage, setModalMessage] = createSignal("");
@@ -34,8 +33,7 @@ export const Members = () => {
 
   const auth = useContext(AuthContext);
   const params = useParams();
-  const [_, setSearchParams] = useSearchParams();
-  const [options, setOptions] = createSignal<Query>({
+  const [options] = createSignal<Query>({
     id: params.id,
     query: "",
     token: auth.user()?.token || "",
@@ -53,8 +51,7 @@ export const Members = () => {
         }
       )
       .then(() => {
-        setParamsAndOptions(setOptions, setSearchParams)({});
-        handleClose();
+        location.reload();
       })
       .catch(console.error);
   };
@@ -70,8 +67,7 @@ export const Members = () => {
         }
       )
       .then(() => {
-        setParamsAndOptions(setOptions, setSearchParams)({});
-        handleClose();
+        location.reload();
       })
       .catch(console.error);
   };
