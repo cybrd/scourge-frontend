@@ -67,7 +67,7 @@ export const Update = () => {
         loading: "Loading",
         success: <b>Done</b>,
       })
-      .then(() => navigate(`/activity?${query}`))
+      .then(() => navigate(`/member?${query}`))
       .catch(console.error);
   };
 
