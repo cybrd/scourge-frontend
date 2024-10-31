@@ -94,7 +94,7 @@ export const Update = () => {
           success: <b>Done</b>,
         }
       )
-      .then(() => navigate(`/employee?${query}`))
+      .then(() => navigate(`/activity?${query}`))
       .catch(console.error);
   };
 
