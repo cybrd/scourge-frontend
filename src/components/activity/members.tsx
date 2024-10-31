@@ -142,17 +142,16 @@ export const Members = () => {
 
       <Modal show={showCreate()} onHide={handleCreateClose} centered>
         <Modal.Header closeButton>
-          <Modal.Title>Delete Record</Modal.Title>
+          <Modal.Title>Add Members</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <div class="form-group row p-1 align-items-center">
-            <label for="inputActivityDate" class="col-sm-2 form-label text-end">
+            <label for="inputMembers" class="col-sm-2 form-label text-end">
               Member Discord Name
             </label>
             <div class="col-sm-4">
               <input
-                id="inputActivityDate"
-                type="date"
+                id="inputMembers"
                 class="form-control"
                 onInput={(e) => setMemberIds(e.target.value.split("\n"))}
               />
