@@ -4,11 +4,13 @@ import { Title } from "@solidjs/meta";
 
 import { Create } from "./create";
 import { List } from "./list";
+import { Update } from "./update";
 
 export const Activity = () => (
   <Route path="/activity" component={ActivityWrapper}>
-    <Route path="/create" component={Create} />
     <Route path="/" component={List} />
+    <Route path="/create" component={Create} />
+    <Route path="/:id" component={Update} />
   </Route>
 );
 

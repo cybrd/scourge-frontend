@@ -38,12 +38,12 @@ const inputPoints = (setFields: SetStoreFunction<Partial<Activity>>) => (
 
 const inputDate = (setFields: SetStoreFunction<Partial<Activity>>) => (
   <div class="form-group row p-1 align-items-center">
-    <label for="inputDate" class="col-sm-2 form-label text-end">
+    <label for="inputActivityDate" class="col-sm-2 form-label text-end">
       Date
     </label>
     <div class="col-sm-4">
       <input
-        id="inputDate"
+        id="inputActivityDate"
         type="date"
         class="form-control"
         onInput={(e) => setFields("activity_date", e.target.value)}

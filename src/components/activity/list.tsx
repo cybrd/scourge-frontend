@@ -71,7 +71,12 @@ export const List = () => {
                     <div>
                       <a
                         href="#"
-                        onClick={() => handleOpen(item().name, item().id)}
+                        onClick={() =>
+                          handleOpen(
+                            `${item().activity_date} ${item().name}`,
+                            item().id
+                          )
+                        }
                       >
                         Delete
                       </a>
