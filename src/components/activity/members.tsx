@@ -146,7 +146,7 @@ export const Members = () => {
               Member Discord Name
             </label>
             <div class="col-sm-4">
-              <input
+              <textarea
                 id="inputMembers"
                 class="form-control"
                 onInput={(e) => setMemberIds(e.target.value.split("\n"))}
