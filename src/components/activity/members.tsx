@@ -1,7 +1,7 @@
 import { Button, Modal } from "solid-bootstrap";
 import { Index, createResource, createSignal, useContext } from "solid-js";
 import toast, { Toaster } from "solid-toast";
-import { useSearchParams } from "@solidjs/router";
+import { useParams, useSearchParams } from "@solidjs/router";
 
 import {
   memberActivityDelete,
@@ -23,7 +23,8 @@ export const Members = () => {
   const handleClose = () => setShow(false);
 
   const auth = useContext(AuthContext);
-  const [params, setParams] = useSearchParams();
+  const params = useParams();
+  const [searchParams, setSearchParams] = useSearchParams();
   const [options, setOptions] = createSignal<Query>({
     id: params.id,
     query: "",
@@ -35,7 +36,7 @@ export const Members = () => {
     toast
       .promise(
         memberActivityDelete(
-          params.id || "",
+          searchParams.id || "",
           memberIdParam,
           auth.user()?.token
         ),
@@ -46,7 +47,7 @@ export const Members = () => {
         }
       )
       .then(() => {
-        setParamsAndOptions(setOptions, setParams)({});
+        setParamsAndOptions(setOptions, setSearchParams)({});
         handleClose();
       })
       .catch(console.error);

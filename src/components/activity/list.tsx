@@ -22,9 +22,9 @@ export const List = () => {
   const handleClose = () => setShow(false);
 
   const auth = useContext(AuthContext);
-  const [params, setParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
   const query = new URLSearchParams({
-    page: params.page || "",
+    page: searchParams.page || "",
   }).toString();
   const [options, setOptions] = createSignal<Query>({
     query,
@@ -42,8 +42,8 @@ export const List = () => {
       .then(() => {
         setParamsAndOptions(
           setOptions,
-          setParams
-        )({ page: params.page || "1" });
+          setSearchParams
+        )({ page: searchParams.page || "1" });
         handleClose();
       })
       .catch(console.error);
@@ -100,7 +100,10 @@ export const List = () => {
           </Index>
         </tbody>
       </table>
-      {pagination(setParamsAndOptions(setOptions, setParams), data()?.counts)}
+      {pagination(
+        setParamsAndOptions(setOptions, setSearchParams),
+        data()?.counts
+      )}
 
       <Modal show={show()} onHide={handleClose} centered>
         <Modal.Header closeButton>
