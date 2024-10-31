@@ -4,6 +4,7 @@ import toast, { Toaster } from "solid-toast";
 import { useParams, useSearchParams } from "@solidjs/router";
 
 import {
+  memberActivityCreate,
   memberActivityDelete,
   memberActivityList,
 } from "../../services/member-activity";
@@ -12,9 +13,11 @@ import { Query } from "../../models/query";
 import { setParamsAndOptions } from "../helper/params";
 
 export const Members = () => {
-  const [show, setShow] = createSignal(false);
   const [modalMessage, setModalMessage] = createSignal("");
   const [memberId, setMemberId] = createSignal("");
+  const [memberIds, setMemberIds] = createSignal<string[]>([]);
+
+  const [show, setShow] = createSignal(false);
   const handleOpen = (message: string, memberIdParam: string) => {
     setModalMessage(message);
     setMemberId(memberIdParam);
@@ -22,9 +25,16 @@ export const Members = () => {
   };
   const handleClose = () => setShow(false);
 
+  const [showCreate, setShowCreate] = createSignal(false);
+  const handleCreateOpen = (message: string) => {
+    setModalMessage(message);
+    setShowCreate(true);
+  };
+  const handleCreateClose = () => setShow(false);
+
   const auth = useContext(AuthContext);
   const params = useParams();
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [_, setSearchParams] = useSearchParams();
   const [options, setOptions] = createSignal<Query>({
     id: params.id,
     query: "",
@@ -32,14 +42,10 @@ export const Members = () => {
   });
   const [data] = createResource(() => options(), memberActivityList);
 
-  const handleDelete = (memberIdParam: string) => {
+  const handleDelete = () => {
     toast
       .promise(
-        memberActivityDelete(
-          searchParams.id || "",
-          memberIdParam,
-          auth.user()?.token
-        ),
+        memberActivityDelete(params.id || "", memberId(), auth.user()?.token),
         {
           error: "An error occurred 😔",
           loading: "Loading",
@@ -53,11 +59,39 @@ export const Members = () => {
       .catch(console.error);
   };
 
+  const handleCreate = () => {
+    toast
+      .promise(
+        memberActivityCreate(params.id || "", memberIds(), auth.user()?.token),
+        {
+          error: "An error occurred 😔",
+          loading: "Loading",
+          success: <b>Members Added</b>,
+        }
+      )
+      .then(() => {
+        setParamsAndOptions(setOptions, setSearchParams)({});
+        handleClose();
+      })
+      .catch(console.error);
+  };
+
   return (
     <>
+      {auth.user() && (
+        <div>
+          <a
+            href="#"
+            onClick={() => handleCreateOpen("Add Members to this activity")}
+          >
+            Delete
+          </a>
+        </div>
+      )}
       <table class="table table-striped table-hover table-bordered">
         <thead class="sticky-top bg-white p-2">
           <tr>
+            <th>Discord Name</th>
             <th>Ingame Name</th>
             <th>-</th>
           </tr>
@@ -66,6 +100,7 @@ export const Members = () => {
           <Index each={data()}>
             {(item) => (
               <tr>
+                <td>{item().discord_name}</td>
                 <td>{item().ingame_name}</td>
                 <td>
                   {auth.user() && (
@@ -99,11 +134,41 @@ export const Members = () => {
           <Button variant="secondary" onClick={handleClose}>
             Cancel
           </Button>
-          <Button variant="primary" onClick={() => handleDelete(memberId())}>
+          <Button variant="primary" onClick={() => handleDelete()}>
             Delete
           </Button>
         </Modal.Footer>
       </Modal>
+
+      <Modal show={showCreate()} onHide={handleCreateClose} centered>
+        <Modal.Header closeButton>
+          <Modal.Title>Delete Record</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <div class="form-group row p-1 align-items-center">
+            <label for="inputActivityDate" class="col-sm-2 form-label text-end">
+              Member Discord Name
+            </label>
+            <div class="col-sm-4">
+              <input
+                id="inputActivityDate"
+                type="date"
+                class="form-control"
+                onInput={(e) => setMemberIds(e.target.value.split("\n"))}
+              />
+            </div>
+          </div>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleCreateClose}>
+            Cancel
+          </Button>
+          <Button variant="primary" onClick={() => handleCreate()}>
+            Delete
+          </Button>
+        </Modal.Footer>
+      </Modal>
+
       <Toaster />
     </>
   );

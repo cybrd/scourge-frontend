@@ -27,12 +27,30 @@ export const memberActivityDelete = (
       import.meta.env.VITE_API_SERVER
     }/activity/${activityId}/member/${memberId}`,
     {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
+      headers: { Authorization: `Bearer ${token}` },
       method: "DELETE",
     }
   ).then((res) => {
+    if (res.status !== StatusCodes.OK) {
+      throw res;
+    }
+
+    return res.json();
+  });
+
+export const memberActivityCreate = (
+  activityId: string,
+  memberIds: string[],
+  token = ""
+) =>
+  fetch(`${import.meta.env.VITE_API_SERVER}/activity/${activityId}/member`, {
+    body: JSON.stringify(memberIds),
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
+    method: "POST",
+  }).then((res) => {
     if (res.status !== StatusCodes.OK) {
       throw res;
     }
