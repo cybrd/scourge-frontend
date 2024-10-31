@@ -30,7 +30,7 @@ export const Members = () => {
     setModalMessage(message);
     setShowCreate(true);
   };
-  const handleCreateClose = () => setShow(false);
+  const handleCreateClose = () => setShowCreate(false);
 
   const auth = useContext(AuthContext);
   const params = useParams();
