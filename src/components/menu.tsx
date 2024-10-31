@@ -10,14 +10,16 @@ export const Menu: Component = () => {
       <div>
         <A href="/">Home</A>
       </div>
-      {auth.user().role === "admin" && (
-        <div>
-          <A href="/admins">Admins</A>
-        </div>
+      {auth.user() && (
+        <>
+          <div>
+            <A href="/admins">Admins</A>
+          </div>
+          <div>
+            <A href="/logout">Logout</A>
+          </div>
+        </>
       )}
-      <div>
-        <A href="/logout">Logout</A>
-      </div>
     </div>
   );
 };
