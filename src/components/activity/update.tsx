@@ -3,7 +3,7 @@ import { SetStoreFunction, createStore } from "solid-js/store";
 import toast, { Toaster } from "solid-toast";
 import { useNavigate, useParams, useSearchParams } from "@solidjs/router";
 
-import { ONE, TEN } from "../../constants";
+import { TEN, ZERO } from "../../constants";
 import { activityGet, activityUpdate } from "../../services/activity";
 import { Activity } from "../../models/activity";
 import { AuthContext } from "../../context/auth";
@@ -60,7 +60,7 @@ const inputDate = (
         type="date"
         class="form-control"
         onInput={(e) => setFields("activity_date", e.target.value)}
-        value={data()?.activity_date.substring(ONE, TEN)}
+        value={data()?.activity_date.substring(ZERO, TEN)}
       />
     </div>
   </div>
