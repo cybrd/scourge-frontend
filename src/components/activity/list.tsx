@@ -23,8 +23,6 @@ export const List = () => {
   const auth = useContext(AuthContext);
   const [params, setParams] = useSearchParams();
   const query = new URLSearchParams({
-    department: params.department || "",
-    fingerPrintId: params.fingerPrintId || "",
     page: params.page || "",
   }).toString();
   const [options, setOptions] = createSignal<Query>({
@@ -55,10 +53,9 @@ export const List = () => {
       <table class="table table-striped table-hover table-bordered">
         <thead class="sticky-top bg-white p-2">
           <tr>
-            <th>Finger Print Id</th>
-            <th>Department</th>
-            <th>Position</th>
             <th>Name</th>
+            <th>Date</th>
+            <th>Points</th>
             <th>-</th>
           </tr>
         </thead>
