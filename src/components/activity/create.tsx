@@ -21,6 +21,21 @@ const inputName = (setFields: SetStoreFunction<Partial<Activity>>) => (
   </div>
 );
 
+const inputPoints = (setFields: SetStoreFunction<Partial<Activity>>) => (
+  <div class="form-group row p-1 align-items-center">
+    <label for="inputPoints" class="col-sm-2 form-label text-end">
+      Name
+    </label>
+    <div class="col-sm-4">
+      <input
+        id="inputPoints"
+        class="form-control"
+        onInput={(e) => setFields("points", Number(e.target.value))}
+      />
+    </div>
+  </div>
+);
+
 export const Create = () => {
   const auth = useContext(AuthContext);
 
@@ -48,6 +63,7 @@ export const Create = () => {
     <div>
       <form id="form" onSubmit={submit}>
         {inputName(setFields)}
+        {inputPoints(setFields)}
 
         <div class="col-sm-6 text-center">
           <button type="submit" class="btn btn-primary">
