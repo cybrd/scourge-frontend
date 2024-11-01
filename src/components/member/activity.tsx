@@ -10,7 +10,7 @@ import {
 import { AuthContext } from "../../context/auth";
 import { Query } from "../../models/query";
 
-export const Members = () => {
+export const Activity = () => {
   const [modalMessage, setModalMessage] = createSignal("");
   const [activityId, setActivityId] = createSignal("");
 

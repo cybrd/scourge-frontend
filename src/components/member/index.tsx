@@ -2,7 +2,7 @@ import { ParentComponent } from "solid-js";
 import { Route } from "@solidjs/router";
 import { Title } from "@solidjs/meta";
 
-import { Activity } from "../activity";
+import { Activity } from "./activity";
 import { Create } from "./create";
 import { List } from "./list";
 import { Update } from "./update";
