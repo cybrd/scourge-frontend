@@ -16,9 +16,6 @@ export const Menu: Component = () => {
       <div>
         <A href="/summary">Summary</A>
       </div>
-      <div>
-        <A href="/login">Login</A>
-      </div>
       {auth.user().username && (
         <>
           <div>
@@ -31,6 +28,11 @@ export const Menu: Component = () => {
             <A href="/logout">Logout</A>
           </div>
         </>
+      )}
+      {!auth.user().username && (
+        <div>
+          <A href="/login">Login</A>
+        </div>
       )}
     </div>
   );
