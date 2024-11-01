@@ -8,12 +8,12 @@ import "./index.scss";
 import { AuthProvider } from "./context/auth";
 import { Protected } from "./components/protected";
 
-import { Home } from "./components/home";
 import { Login } from "./components/login";
 import { Logout } from "./components/logout";
 
-import { Activity } from "./components/activity";
-import { Member } from "./components/member";
+import { Activity, ActivityProtected } from "./components/activity";
+import { Member, MemberProtected } from "./components/member";
+import { List as ActivityList } from "./components/activity/list";
 import { Summary } from "./components/summary";
 
 const root = document.getElementById("root") as HTMLElement;
@@ -30,15 +30,18 @@ render(
       <MetaProvider>
         <Router>
           <AuthProvider>
+            <Route path="/" component={ActivityList} />
             <Route path="/login" component={Login} />
             <Route path="/logout" component={Logout} />
 
             <Route component={Protected}>
-              <Route path="/" component={Home} />
-              <Activity />
-              <Member />
-              <Summary />
+              <ActivityProtected />
+              <MemberProtected />
             </Route>
+
+            <Activity />
+            <Member />
+            <Summary />
           </AuthProvider>
         </Router>
       </MetaProvider>

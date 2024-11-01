@@ -5,6 +5,7 @@ import { useContext } from "solid-js";
 import { Activity } from "../../models/activity";
 import { AuthContext } from "../../context/auth";
 import { activityCreate } from "../../services/activity";
+import { useNavigate } from "@solidjs/router";
 
 const inputName = (setFields: SetStoreFunction<Partial<Activity>>) => (
   <div class="form-group row p-1 align-items-center">
@@ -54,8 +55,9 @@ const inputDate = (setFields: SetStoreFunction<Partial<Activity>>) => (
 
 export const Create = () => {
   const auth = useContext(AuthContext);
+  const navigate = useNavigate();
 
-  let [fields, setFields] = createStore<Partial<Activity>>({});
+  const [fields, setFields] = createStore<Partial<Activity>>({});
 
   const submit = (event: Event) => {
     event.preventDefault();
@@ -67,11 +69,7 @@ export const Create = () => {
         loading: "Loading",
         success: <b>Done</b>,
       })
-      .then(() => {
-        const form = document.getElementById("form") as HTMLFormElement;
-        form.reset();
-        [fields, setFields] = createStore<Partial<Activity>>({});
-      })
+      .then(() => navigate("/activity"))
       .catch(console.error);
   };
 

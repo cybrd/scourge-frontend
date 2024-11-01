@@ -9,8 +9,13 @@ import { Update } from "./update";
 export const Member = () => (
   <Route path="/member" component={MemberWrapper}>
     <Route path="/" component={List} />
-    <Route path="/create" component={Create} />
     <Route path="/:id" component={Update} />
+  </Route>
+);
+
+export const MemberProtected = () => (
+  <Route path="/member" component={MemberWrapper}>
+    <Route path="/create" component={Create} />
   </Route>
 );
 

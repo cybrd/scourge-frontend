@@ -1,7 +1,7 @@
 import { Resource, Show, createResource, useContext } from "solid-js";
 import { SetStoreFunction, createStore } from "solid-js/store";
 import toast, { Toaster } from "solid-toast";
-import { useNavigate, useParams, useSearchParams } from "@solidjs/router";
+import { useNavigate, useParams } from "@solidjs/router";
 
 import { memberGet, memberUpdate } from "../../services/member";
 import { AuthContext } from "../../context/auth";
@@ -48,10 +48,6 @@ const inputIngameName = (
 export const Update = () => {
   const auth = useContext(AuthContext);
   const params = useParams();
-  const [searchParams] = useSearchParams();
-  const query = new URLSearchParams({
-    page: searchParams.page || "",
-  }).toString();
   const navigate = useNavigate();
 
   const [data] = createResource(() => memberGet(params.id, auth.user()?.token));
@@ -67,7 +63,7 @@ export const Update = () => {
         loading: "Loading",
         success: <b>Done</b>,
       })
-      .then(() => navigate(`/member?${query}`))
+      .then(() => navigate(`/member`))
       .catch(console.error);
   };
 

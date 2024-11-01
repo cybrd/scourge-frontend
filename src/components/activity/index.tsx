@@ -10,8 +10,13 @@ import { Update } from "./update";
 export const Activity = () => (
   <Route path="/activity" component={ActivityWrapper}>
     <Route path="/" component={List} />
-    <Route path="/create" component={Create} />
     <Route path="/:id/members" component={Members} />
+  </Route>
+);
+
+export const ActivityProtected = () => (
+  <Route path="/activity" component={ActivityWrapper}>
+    <Route path="/create" component={Create} />
     <Route path="/:id" component={Update} />
   </Route>
 );
