@@ -5,5 +5,7 @@ export type Member = {
 };
 
 export type MemberWithPoints = Member & {
+  available_points: number;
+  available_archboss_points: number;
   total_points: number;
 };
