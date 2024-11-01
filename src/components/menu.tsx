@@ -16,7 +16,7 @@ export const Menu: Component = () => {
       <div>
         <A href="/summary">Summary</A>
       </div>
-      {auth.user() && (
+      {auth.user().username && (
         <>
           <div>
             <A href="/activity/create">Activty Create</A>
