@@ -50,6 +50,7 @@ export const Activity = () => {
         <thead class="sticky-top bg-white p-2">
           <tr>
             <th>Activity</th>
+            <th>Type</th>
             <th>Date</th>
             <th>Points</th>
             <th>-</th>
@@ -60,6 +61,7 @@ export const Activity = () => {
             {(item) => (
               <tr>
                 <td>{item().name}</td>
+                <td>{item().type}</td>
                 <td>{item().activity_date}</td>
                 <td>{item().points}</td>
                 <td>
