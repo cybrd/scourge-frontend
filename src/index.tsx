@@ -5,8 +5,8 @@ import { render } from "solid-js/web";
 import "bootstrap/scss/bootstrap.scss";
 import "./index.scss";
 
+import { NotProtected, Protected } from "./components/protected";
 import { AuthProvider } from "./context/auth";
-import { Protected } from "./components/protected";
 
 import { Login } from "./components/login";
 import { Logout } from "./components/logout";
@@ -30,7 +30,6 @@ render(
       <MetaProvider>
         <Router>
           <AuthProvider>
-            <Route path="/" component={ActivityList} />
             <Route path="/login" component={Login} />
             <Route path="/logout" component={Logout} />
 
@@ -39,9 +38,12 @@ render(
               <MemberProtected />
             </Route>
 
-            <Activity />
-            <Member />
-            <Summary />
+            <NotProtected>
+              <Route path="/" component={ActivityList} />
+              <Activity />
+              <Member />
+              <Summary />
+            </NotProtected>
           </AuthProvider>
         </Router>
       </MetaProvider>
