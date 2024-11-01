@@ -1,14 +1,12 @@
-import { A, useSearchParams } from "@solidjs/router";
 import { Button, Modal } from "solid-bootstrap";
 import { Index, createResource, createSignal, useContext } from "solid-js";
 import toast, { Toaster } from "solid-toast";
+import { A } from "@solidjs/router";
 
 import { TEN, ZERO } from "../../constants";
 import { activityDelete, activityList } from "../../services/activity";
 import { AuthContext } from "../../context/auth";
 import { Query } from "../../models/query";
-import { pagination } from "../helper/pagination";
-import { setParamsAndOptions } from "../helper/params";
 
 export const List = () => {
   const [show, setShow] = createSignal(false);
@@ -22,12 +20,7 @@ export const List = () => {
   const handleClose = () => setShow(false);
 
   const auth = useContext(AuthContext);
-  const [searchParams, setSearchParams] = useSearchParams();
-  const query = new URLSearchParams({
-    page: searchParams.page || "",
-  }).toString();
-  const [options, setOptions] = createSignal<Query>({
-    query,
+  const [options] = createSignal<Query>({
     token: auth.user()?.token || "",
   });
   const [data] = createResource(() => options(), activityList);
@@ -39,13 +32,7 @@ export const List = () => {
         loading: "Loading",
         success: <b>Deleted</b>,
       })
-      .then(() => {
-        setParamsAndOptions(
-          setOptions,
-          setSearchParams
-        )({ page: searchParams.page || "1" });
-        handleClose();
-      })
+      .then(() => location.reload())
       .catch(console.error);
   };
 
@@ -75,35 +62,33 @@ export const List = () => {
                 </td>
                 <td>
                   {auth.user().username && (
-                    <div>
-                      <a
-                        href="#"
-                        onClick={() =>
-                          handleOpen(
-                            `${item().activity_date} ${item().name}`,
-                            item().id
-                          )
-                        }
-                      >
-                        Delete
-                      </a>
-                    </div>
+                    <>
+                      <div>
+                        <a
+                          href="#"
+                          onClick={() =>
+                            handleOpen(
+                              `${item().activity_date} ${item().name}`,
+                              item().id
+                            )
+                          }
+                        >
+                          Delete
+                        </a>
+                      </div>
+                      <div>
+                        <A href={`/activity/${item().id}?${options().query}`}>
+                          Update
+                        </A>
+                      </div>
+                    </>
                   )}
-                  <div>
-                    <A href={`/activity/${item().id}?${options().query}`}>
-                      Update
-                    </A>
-                  </div>
                 </td>
               </tr>
             )}
           </Index>
         </tbody>
       </table>
-      {pagination(
-        setParamsAndOptions(setOptions, setSearchParams),
-        data()?.counts
-      )}
 
       <Modal show={show()} onHide={handleClose} centered>
         <Modal.Header closeButton>

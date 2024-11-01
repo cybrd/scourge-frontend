@@ -49,9 +49,7 @@ export const Members = () => {
           success: <b>Deleted</b>,
         }
       )
-      .then(() => {
-        location.reload();
-      })
+      .then(() => location.reload())
       .catch(console.error);
   };
 
@@ -65,9 +63,7 @@ export const Members = () => {
           success: <b>Members Added</b>,
         }
       )
-      .then(() => {
-        location.reload();
-      })
+      .then(() => location.reload())
       .catch(console.error);
   };
 

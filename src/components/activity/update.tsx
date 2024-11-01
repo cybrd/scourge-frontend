@@ -1,7 +1,7 @@
 import { Resource, Show, createResource, useContext } from "solid-js";
 import { SetStoreFunction, createStore } from "solid-js/store";
 import toast, { Toaster } from "solid-toast";
-import { useNavigate, useParams, useSearchParams } from "@solidjs/router";
+import { useNavigate, useParams } from "@solidjs/router";
 
 import { TEN, ZERO } from "../../constants";
 import { activityGet, activityUpdate } from "../../services/activity";
@@ -69,10 +69,6 @@ const inputDate = (
 export const Update = () => {
   const auth = useContext(AuthContext);
   const params = useParams();
-  const [searchParams] = useSearchParams();
-  const query = new URLSearchParams({
-    page: searchParams.page || "",
-  }).toString();
   const navigate = useNavigate();
 
   const [data] = createResource(() =>
@@ -93,7 +89,7 @@ export const Update = () => {
           success: <b>Done</b>,
         }
       )
-      .then(() => navigate(`/activity?${query}`))
+      .then(() => navigate(`/activity`))
       .catch(console.error);
   };
 
