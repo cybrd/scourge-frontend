@@ -12,12 +12,12 @@ import { Query } from "../../models/query";
 
 export const Members = () => {
   const [modalMessage, setModalMessage] = createSignal("");
-  const [memberId, setMemberId] = createSignal("");
+  const [activityId, setActivityId] = createSignal("");
 
   const [show, setShow] = createSignal(false);
-  const handleOpen = (message: string, memberIdParam: string) => {
+  const handleOpen = (message: string, activityIdParam: string) => {
     setModalMessage(message);
-    setMemberId(memberIdParam);
+    setActivityId(activityIdParam);
     setShow(true);
   };
   const handleClose = () => setShow(false);
@@ -33,7 +33,7 @@ export const Members = () => {
   const handleDelete = () => {
     toast
       .promise(
-        memberActivityDelete(params.id || "", memberId(), auth.user()?.token),
+        memberActivityDelete(activityId(), params.id || "", auth.user()?.token),
         {
           error: "An error occurred 😔",
           loading: "Loading",
@@ -70,7 +70,7 @@ export const Members = () => {
                         onClick={() =>
                           handleOpen(
                             `${item().activity_date} ${item().name}`,
-                            item().member_id
+                            item().activity_id
                           )
                         }
                       >
