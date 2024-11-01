@@ -42,6 +42,7 @@ export const List = () => {
         <thead class="sticky-top bg-white p-2">
           <tr>
             <th>Name</th>
+            <th>Type</th>
             <th>Date</th>
             <th>Points</th>
             <th>Member Count</th>
@@ -53,6 +54,7 @@ export const List = () => {
             {(item) => (
               <tr>
                 <td>{item().name}</td>
+                <td>{item().type}</td>
                 <td>{item().activity_date.substring(ZERO, TEN)}</td>
                 <td>{item().points}</td>
                 <td>

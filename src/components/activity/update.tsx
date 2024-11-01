@@ -3,9 +3,9 @@ import { SetStoreFunction, createStore } from "solid-js/store";
 import toast, { Toaster } from "solid-toast";
 import { useNavigate, useParams } from "@solidjs/router";
 
+import { Activity, activityTypeList } from "../../models/activity";
 import { TEN, ZERO } from "../../constants";
 import { activityGet, activityUpdate } from "../../services/activity";
-import { Activity } from "../../models/activity";
 import { AuthContext } from "../../context/auth";
 
 const inputName = (
@@ -23,6 +23,32 @@ const inputName = (
         onInput={(e) => setFields("name", e.target.value)}
         value={data()?.name}
       />
+    </div>
+  </div>
+);
+
+const selectType = (
+  data: Resource<Activity>,
+  setFields: SetStoreFunction<Partial<Activity>>
+) => (
+  <div class="form-group row p-1">
+    <label for="selectType" class="col-sm-2 form-label text-end">
+      Type
+    </label>
+    <div class="col-sm-4">
+      <select
+        id="selectType"
+        onChange={(e) => setFields("type", e.target.value)}
+      >
+        <option value="">----</option>
+        {activityTypeList.map((x) => {
+          if (data()?.type === x) {
+            return <option selected>{x}</option>;
+          }
+
+          return <option>{x}</option>;
+        })}
+      </select>
     </div>
   </div>
 );
@@ -98,6 +124,7 @@ export const Update = () => {
       <div>
         <form id="form" onSubmit={submit}>
           {inputName(data, setFields)}
+          {selectType(data, setFields)}
           {inputDate(data, setFields)}
           {inputPoints(data, setFields)}
 

@@ -2,7 +2,7 @@ import { SetStoreFunction, createStore } from "solid-js/store";
 import toast, { Toaster } from "solid-toast";
 import { useContext } from "solid-js";
 
-import { Activity } from "../../models/activity";
+import { Activity, activityTypeList } from "../../models/activity";
 import { AuthContext } from "../../context/auth";
 import { activityCreate } from "../../services/activity";
 import { useNavigate } from "@solidjs/router";
@@ -18,6 +18,25 @@ const inputName = (setFields: SetStoreFunction<Partial<Activity>>) => (
         class="form-control"
         onInput={(e) => setFields("name", e.target.value)}
       />
+    </div>
+  </div>
+);
+
+const selectType = (setFields: SetStoreFunction<Partial<Activity>>) => (
+  <div class="form-group row p-1">
+    <label for="selectType" class="col-sm-2 form-label text-end">
+      Type
+    </label>
+    <div class="col-sm-4">
+      <select
+        id="selectType"
+        onChange={(e) => setFields("type", e.target.value)}
+      >
+        <option value="">----</option>
+        {activityTypeList.map((x) => (
+          <option>{x}</option>
+        ))}
+      </select>
     </div>
   </div>
 );
@@ -77,6 +96,7 @@ export const Create = () => {
     <div>
       <form id="form" onSubmit={submit}>
         {inputName(setFields)}
+        {selectType(setFields)}
         {inputDate(setFields)}
         {inputPoints(setFields)}
 
