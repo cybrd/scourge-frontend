@@ -71,12 +71,12 @@ export const Members = () => {
     <>
       {auth.user().username && (
         <div>
-          <a
-            href="#"
+          <Button
+            variant="primary"
             onClick={() => handleCreateOpen("Add Members to this activity")}
           >
-            Add
-          </a>
+            Add Members
+          </Button>
         </div>
       )}
       <table class="table table-striped table-hover table-bordered">
