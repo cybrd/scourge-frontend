@@ -1,7 +1,7 @@
+import { A, useParams } from "@solidjs/router";
 import { Button, Modal } from "solid-bootstrap";
 import { Index, createResource, createSignal, useContext } from "solid-js";
 import toast, { Toaster } from "solid-toast";
-import { useParams } from "@solidjs/router";
 
 import {
   memberActivityCreate,
@@ -92,7 +92,11 @@ export const Members = () => {
             {(item) => (
               <tr>
                 <td>{item().discord_name}</td>
-                <td>{item().ingame_name}</td>
+                <td>
+                  <A href={`/member/${item().id}/activity`}>
+                    {item().ingame_name}
+                  </A>
+                </td>
                 <td>
                   {auth.user().username && (
                     <div>

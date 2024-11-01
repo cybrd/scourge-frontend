@@ -50,7 +50,11 @@ export const List = () => {
             {(item) => (
               <tr>
                 <td>{item().discord_name}</td>
-                <td>{item().ingame_name}</td>
+                <td>
+                  <A href={`/member/${item().id}/activity`}>
+                    {item().ingame_name}
+                  </A>
+                </td>
                 <td>
                   {auth.user().username && (
                     <>
