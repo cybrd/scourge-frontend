@@ -13,7 +13,7 @@ import { Logout } from "./components/logout";
 
 import { Activity, ActivityProtected } from "./components/activity";
 import { Member, MemberProtected } from "./components/member";
-import { List as ActivityList } from "./components/activity/list";
+import { Home } from "./components/home";
 import { Summary } from "./components/summary";
 
 const root = document.getElementById("root") as HTMLElement;
@@ -30,6 +30,7 @@ render(
       <MetaProvider>
         <Router>
           <AuthProvider>
+            <Route path="/" component={Home} />
             <Route path="/login" component={Login} />
             <Route path="/logout" component={Logout} />
 
@@ -38,12 +39,11 @@ render(
               <MemberProtected />
             </Route>
 
-            <NotProtected>
-              <Route path="/" component={ActivityList} />
+            <Route component={NotProtected}>
               <Activity />
               <Member />
               <Summary />
-            </NotProtected>
+            </Route>
           </AuthProvider>
         </Router>
       </MetaProvider>
