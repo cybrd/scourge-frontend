@@ -57,3 +57,20 @@ export const memberActivityCreate = (
 
     return res.json();
   });
+
+export const memberActivityListByMember = (options: Query) =>
+  fetch(
+    `${import.meta.env.VITE_API_SERVER}/member-activity/member/${options.id}`,
+    {
+      headers: {
+        Authorization: `Bearer ${options.token}`,
+        "Content-Type": "application/json",
+      },
+    }
+  ).then((res): Promise<MemberActivityFull[]> => {
+    if (res.status !== StatusCodes.OK) {
+      throw res;
+    }
+
+    return res.json();
+  });
