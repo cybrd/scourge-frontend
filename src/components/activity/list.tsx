@@ -74,7 +74,7 @@ export const List = () => {
                   </A>
                 </td>
                 <td>
-                  {auth.user() && (
+                  {auth.user().username && (
                     <div>
                       <a
                         href="#"

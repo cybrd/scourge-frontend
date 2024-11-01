@@ -60,7 +60,7 @@ export const List = () => {
                 <td>{item().discord_name}</td>
                 <td>{item().ingame_name}</td>
                 <td>
-                  {auth.user() && (
+                  {auth.user().username && (
                     <div>
                       <a
                         href="#"

@@ -73,7 +73,7 @@ export const Members = () => {
 
   return (
     <>
-      {auth.user() && (
+      {auth.user().username && (
         <div>
           <a
             href="#"
@@ -98,7 +98,7 @@ export const Members = () => {
                 <td>{item().discord_name}</td>
                 <td>{item().ingame_name}</td>
                 <td>
-                  {auth.user() && (
+                  {auth.user().username && (
                     <div>
                       <a
                         href="#"
