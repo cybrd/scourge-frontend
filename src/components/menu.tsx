@@ -16,6 +16,9 @@ export const Menu: Component = () => {
       <div>
         <A href="/summary">Summary</A>
       </div>
+      <div>
+        <A href="/login">Login</A>
+      </div>
       {auth.user().username && (
         <>
           <div>

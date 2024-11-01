@@ -30,10 +30,6 @@ render(
       <MetaProvider>
         <Router>
           <AuthProvider>
-            <Route path="/" component={Home} />
-            <Route path="/login" component={Login} />
-            <Route path="/logout" component={Logout} />
-
             <Route component={Protected}>
               <ActivityProtected />
               <MemberProtected />
@@ -43,6 +39,9 @@ render(
               <Activity />
               <Member />
               <Summary />
+              <Route path="/" component={Home} />
+              <Route path="/login" component={Login} />
+              <Route path="/logout" component={Logout} />
             </Route>
           </AuthProvider>
         </Router>
