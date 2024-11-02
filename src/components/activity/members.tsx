@@ -82,7 +82,7 @@ export const Members = () => {
   return (
     <>
       <Show when={activity()}>
-        <table>
+        <table class="table table-striped table-hover table-bordered">
           <tbody>
             <tr>
               <td>Activity</td>

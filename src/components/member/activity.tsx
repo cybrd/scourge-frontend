@@ -59,7 +59,7 @@ export const Activity = () => {
   return (
     <>
       <Show when={member()}>
-        <table>
+        <table class="table table-striped table-hover table-bordered">
           <tbody>
             <tr>
               <td>Discord Name</td>
