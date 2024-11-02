@@ -19,6 +19,9 @@ import { Query } from "../../models/query";
 import { activityGet } from "../../services/activity";
 
 export const Members = () => {
+  const auth = useContext(AuthContext);
+  const params = useParams();
+
   const [modalMessage, setModalMessage] = createSignal("");
   const [memberId, setMemberId] = createSignal("");
   const [memberIds, setMemberIds] = createSignal<string[]>([]);
@@ -26,6 +29,12 @@ export const Members = () => {
   const [activity] = createResource(() =>
     activityGet(params.id, auth.user()?.token)
   );
+
+  const [options] = createSignal<Query>({
+    id: params.id,
+    token: auth.user()?.token || "",
+  });
+  const [data] = createResource(() => options(), memberActivityList);
 
   const [show, setShow] = createSignal(false);
   const handleOpen = (message: string, memberIdParam: string) => {
@@ -41,14 +50,6 @@ export const Members = () => {
     setShowCreate(true);
   };
   const handleCreateClose = () => setShowCreate(false);
-
-  const auth = useContext(AuthContext);
-  const params = useParams();
-  const [options] = createSignal<Query>({
-    id: params.id,
-    token: auth.user()?.token || "",
-  });
-  const [data] = createResource(() => options(), memberActivityList);
 
   const handleDelete = () => {
     toast
