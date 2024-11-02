@@ -1,6 +1,12 @@
 import { A, useParams } from "@solidjs/router";
 import { Button, Modal } from "solid-bootstrap";
-import { Index, createResource, createSignal, useContext } from "solid-js";
+import {
+  Index,
+  Show,
+  createResource,
+  createSignal,
+  useContext,
+} from "solid-js";
 import toast, { Toaster } from "solid-toast";
 
 import {
@@ -10,11 +16,16 @@ import {
 } from "../../services/member-activity";
 import { AuthContext } from "../../context/auth";
 import { Query } from "../../models/query";
+import { activityGet } from "../../services/activity";
 
 export const Members = () => {
   const [modalMessage, setModalMessage] = createSignal("");
   const [memberId, setMemberId] = createSignal("");
   const [memberIds, setMemberIds] = createSignal<string[]>([]);
+
+  const [activity] = createResource(() =>
+    activityGet(params.id, auth.user()?.token)
+  );
 
   const [show, setShow] = createSignal(false);
   const handleOpen = (message: string, memberIdParam: string) => {
@@ -69,8 +80,26 @@ export const Members = () => {
 
   return (
     <>
+      <Show when={activity()}>
+        <table>
+          <tbody>
+            <tr>
+              <td>Activity</td>
+              <td>{activity()?.name}</td>
+            </tr>
+            <tr>
+              <td>Type</td>
+              <td>{activity()?.type}</td>
+            </tr>
+            <tr>
+              <td>Date</td>
+              <td>{activity()?.activity_date}</td>
+            </tr>
+          </tbody>
+        </table>
+      </Show>
       {auth.user().username && (
-        <div>
+        <div class="p-2">
           <Button
             variant="primary"
             onClick={() => handleCreateOpen("Add Members to this activity")}
