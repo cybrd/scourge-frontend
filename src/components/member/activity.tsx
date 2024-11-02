@@ -1,5 +1,11 @@
 import { Button, Modal } from "solid-bootstrap";
-import { Index, createResource, createSignal, useContext } from "solid-js";
+import {
+  Index,
+  Show,
+  createResource,
+  createSignal,
+  useContext,
+} from "solid-js";
 import toast, { Toaster } from "solid-toast";
 import { useParams } from "@solidjs/router";
 
@@ -9,10 +15,24 @@ import {
 } from "../../services/member-activity";
 import { AuthContext } from "../../context/auth";
 import { Query } from "../../models/query";
+import { memberGet } from "../../services/member";
 
 export const Activity = () => {
+  const auth = useContext(AuthContext);
+  const params = useParams();
+
   const [modalMessage, setModalMessage] = createSignal("");
   const [activityId, setActivityId] = createSignal("");
+
+  const [member] = createResource(() =>
+    memberGet(params.id, auth.user()?.token)
+  );
+
+  const [options] = createSignal<Query>({
+    id: params.id,
+    token: auth.user()?.token || "",
+  });
+  const [data] = createResource(() => options(), memberActivityListByMember);
 
   const [show, setShow] = createSignal(false);
   const handleOpen = (message: string, activityIdParam: string) => {
@@ -21,14 +41,6 @@ export const Activity = () => {
     setShow(true);
   };
   const handleClose = () => setShow(false);
-
-  const auth = useContext(AuthContext);
-  const params = useParams();
-  const [options] = createSignal<Query>({
-    id: params.id,
-    token: auth.user()?.token || "",
-  });
-  const [data] = createResource(() => options(), memberActivityListByMember);
 
   const handleDelete = () => {
     toast
@@ -46,6 +58,20 @@ export const Activity = () => {
 
   return (
     <>
+      <Show when={member()}>
+        <table>
+          <tbody>
+            <tr>
+              <td>Discord Name</td>
+              <td>{member()?.discord_name}</td>
+            </tr>
+            <tr>
+              <td>Ingame Name</td>
+              <td>{member()?.ingame_name}</td>
+            </tr>
+          </tbody>
+        </table>
+      </Show>
       <table class="table table-striped table-hover table-bordered">
         <thead class="sticky-top bg-white p-2">
           <tr>
