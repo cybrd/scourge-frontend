@@ -38,8 +38,8 @@ export const List = () => {
         <tr>
           <th>Discord Name</th>
           <th>Ingame Name</th>
-          <th>Avaialbe Points</th>
-          <th>Avaialbe Points (Archboss)</th>
+          <th>Available Points</th>
+          <th>Available Points (Archboss)</th>
           <th>Total Points</th>
         </tr>
       </thead>
