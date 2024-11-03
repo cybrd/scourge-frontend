@@ -99,7 +99,7 @@ export const Members = () => {
           </tbody>
         </table>
       </Show>
-      {auth.user().username && (
+      {auth.user()?.username && (
         <div class="p-2">
           <Button
             variant="primary"
@@ -128,7 +128,7 @@ export const Members = () => {
                   </A>
                 </td>
                 <td>
-                  {auth.user().username && (
+                  {auth.user()?.username && (
                     <div>
                       <a
                         href="#"

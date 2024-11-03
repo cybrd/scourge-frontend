@@ -63,7 +63,7 @@ export const List = () => {
                   </A>
                 </td>
                 <td>
-                  {auth.user().username && (
+                  {auth.user()?.username && (
                     <>
                       <div>
                         <a

@@ -91,7 +91,7 @@ export const Activity = () => {
                 <td>{item().activity_date}</td>
                 <td>{item().points}</td>
                 <td>
-                  {auth.user().username && (
+                  {auth.user()?.username && (
                     <div>
                       <a
                         href="#"
