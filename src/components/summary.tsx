@@ -1,3 +1,4 @@
+import { A, Route } from "@solidjs/router";
 import {
   Index,
   ParentComponent,
@@ -5,7 +6,6 @@ import {
   createSignal,
   useContext,
 } from "solid-js";
-import { Route } from "@solidjs/router";
 import { Title } from "@solidjs/meta";
 
 import { AuthContext } from "../context/auth";
@@ -48,7 +48,11 @@ export const List = () => {
           {(item) => (
             <tr>
               <td>{item().discord_name}</td>
-              <td>{item().ingame_name}</td>
+              <td>
+                <A href={`/member/${item().id}/activity`}>
+                  {item().ingame_name}
+                </A>
+              </td>
               <td>{item().available_points}</td>
               <td>{item().available_archboss_points}</td>
               <td>{item().total_points}</td>
