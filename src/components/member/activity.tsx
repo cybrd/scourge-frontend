@@ -1,3 +1,4 @@
+import { A, useParams } from "@solidjs/router";
 import { Button, Modal } from "solid-bootstrap";
 import {
   Index,
@@ -7,7 +8,6 @@ import {
   useContext,
 } from "solid-js";
 import toast, { Toaster } from "solid-toast";
-import { useParams } from "@solidjs/router";
 
 import {
   memberActivityDelete,
@@ -88,7 +88,11 @@ export const Activity = () => {
               <tr>
                 <td>{item().name}</td>
                 <td>{item().type}</td>
-                <td>{item().activity_date}</td>
+                <td>
+                  <A href={`/activity/${item().id}/members`}>
+                    {item().activity_date}
+                  </A>
+                </td>
                 <td>{item().points}</td>
                 <td>
                   {auth.user()?.username && (

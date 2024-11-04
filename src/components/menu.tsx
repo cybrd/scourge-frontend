@@ -8,7 +8,7 @@ export const Menu: Component = () => {
   return (
     <div class="text-nowrap p-2 d-print-none">
       <div>
-        <A href="/activity">Activty List</A>
+        <A href="/activity">Activity List</A>
       </div>
       <div>
         <A href="/member">Member List</A>
