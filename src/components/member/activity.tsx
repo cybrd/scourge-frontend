@@ -89,7 +89,7 @@ export const Activity = () => {
                 <td>{item().name}</td>
                 <td>{item().type}</td>
                 <td>
-                  <A href={`/activity/${item().id}/members`}>
+                  <A href={`/activity/${item().activity_id}/members`}>
                     {item().activity_date}
                   </A>
                 </td>
