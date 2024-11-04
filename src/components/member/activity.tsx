@@ -87,12 +87,12 @@ export const Activity = () => {
             {(item) => (
               <tr>
                 <td>{item().name}</td>
-                <td>{item().type}</td>
                 <td>
                   <A href={`/activity/${item().activity_id}/members`}>
-                    {item().activity_date}
+                    {item().type}
                   </A>
                 </td>
+                <td>{item().activity_date}</td>
                 <td>{item().points}</td>
                 <td>
                   {auth.user()?.username && (
