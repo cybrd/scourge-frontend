@@ -70,7 +70,9 @@ export const List = () => {
                           href="#"
                           onClick={() =>
                             handleOpen(
-                              `${item().activity_date} ${item().name}`,
+                              `${item().activity_date.substring(ZERO, TEN)} ${
+                                item().name
+                              }`,
                               item().id
                             )
                           }

@@ -9,6 +9,7 @@ import {
 } from "solid-js";
 import toast, { Toaster } from "solid-toast";
 
+import { TEN, ZERO } from "../../constants";
 import {
   memberActivityDelete,
   memberActivityListByMember,
@@ -92,7 +93,7 @@ export const Activity = () => {
                     {item().type}
                   </A>
                 </td>
-                <td>{item().activity_date}</td>
+                <td>{item().activity_date.substring(ZERO, TEN)}</td>
                 <td>{item().points}</td>
                 <td>
                   {auth.user()?.username && (
@@ -101,7 +102,9 @@ export const Activity = () => {
                         href="#"
                         onClick={() =>
                           handleOpen(
-                            `${item().activity_date} ${item().name}`,
+                            `${item().activity_date.substring(ZERO, TEN)} ${
+                              item().name
+                            }`,
                             item().activity_id
                           )
                         }
