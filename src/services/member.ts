@@ -17,6 +17,20 @@ export const memberList = (options: Query) =>
     return res.json();
   });
 
+export const memberCounts = (options: Query) =>
+  fetch(`${import.meta.env.VITE_API_SERVER}/member/counts`, {
+    headers: {
+      Authorization: `Bearer ${options.token}`,
+      "Content-Type": "application/json",
+    },
+  }).then((res): Promise<number> => {
+    if (res.status !== StatusCodes.OK) {
+      throw res;
+    }
+
+    return res.json();
+  });
+
 export const memberGet = (id: string, token = "") =>
   fetch(`${import.meta.env.VITE_API_SERVER}/member/${id}`, {
     headers: {

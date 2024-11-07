@@ -3,7 +3,7 @@ import { Index, createResource, createSignal, useContext } from "solid-js";
 import toast, { Toaster } from "solid-toast";
 import { A } from "@solidjs/router";
 
-import { memberDelete, memberList } from "../../services/member";
+import { memberCounts, memberDelete, memberList } from "../../services/member";
 import { AuthContext } from "../../context/auth";
 import { Query } from "../../models/query";
 
@@ -23,6 +23,7 @@ export const List = () => {
     token: auth.user()?.token || "",
   });
   const [data] = createResource(() => options(), memberList);
+  const [counts] = createResource(() => options(), memberCounts);
 
   const handleDelete = (id: string) => {
     toast
@@ -37,6 +38,7 @@ export const List = () => {
 
   return (
     <>
+      <p>Total Members: {counts()}</p>
       <table class="table table-striped table-hover table-bordered">
         <thead class="sticky-top bg-white p-2">
           <tr>
