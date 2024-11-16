@@ -45,6 +45,7 @@ export const List = () => {
     });
 
     console.log(sorted);
+    console.log(data());
 
     mutate(sorted);
   };
@@ -55,9 +56,11 @@ export const List = () => {
         <tr>
           <th onClick={sortBy("discord_name")}>Discord Name</th>
           <th onClick={sortBy("ingame_name")}>Ingame Name</th>
-          <th>Available Points</th>
-          <th>Available Points (Archboss)</th>
-          <th>Total Points</th>
+          <th onClick={sortBy("available_points")}>Available Points</th>
+          <th onClick={sortBy("available_archboss_points")}>
+            Available Points (Archboss)
+          </th>
+          <th onClick={sortBy("total_points")}>Total Points</th>
         </tr>
       </thead>
       <tbody>
