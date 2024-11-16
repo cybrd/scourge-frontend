@@ -34,6 +34,8 @@ export const List = () => {
   const [data, { mutate }] = createResource(() => options(), summary);
 
   const sortBy = (key: keyof MemberWithPoints) => () => {
+    console.log("sortBy", key);
+
     const sorted = data()?.sort((a, b) => {
       if (typeof a[key] !== "string" && typeof b[key] !== "string") {
         return a[key] - b[key];
