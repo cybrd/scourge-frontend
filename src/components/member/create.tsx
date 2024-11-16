@@ -2,9 +2,47 @@ import { SetStoreFunction, createStore } from "solid-js/store";
 import toast, { Toaster } from "solid-toast";
 import { useContext } from "solid-js";
 
+import { Member, memberTeamList, memberWeaponList } from "../../models/member";
 import { AuthContext } from "../../context/auth";
-import { Member } from "../../models/member";
 import { memberCreate } from "../../services/member";
+
+const selectWeapon = (setFields: SetStoreFunction<Partial<Member>>) => (
+  <div class="form-group row p-1">
+    <label for="selectType" class="col-sm-2 form-label text-end">
+      Type
+    </label>
+    <div class="col-sm-4">
+      <select
+        id="selectType"
+        onChange={(e) => setFields("weapon", e.target.value)}
+      >
+        <option value="">----</option>
+        {memberWeaponList.map((x) => (
+          <option>{x}</option>
+        ))}
+      </select>
+    </div>
+  </div>
+);
+
+const selectTeam = (setFields: SetStoreFunction<Partial<Member>>) => (
+  <div class="form-group row p-1">
+    <label for="selectType" class="col-sm-2 form-label text-end">
+      Type
+    </label>
+    <div class="col-sm-4">
+      <select
+        id="selectType"
+        onChange={(e) => setFields("team", e.target.value)}
+      >
+        <option value="">----</option>
+        {memberTeamList.map((x) => (
+          <option>{x}</option>
+        ))}
+      </select>
+    </div>
+  </div>
+);
 
 const inputDiscordName = (setFields: SetStoreFunction<Partial<Member>>) => (
   <div class="form-group row p-1 align-items-center">
@@ -64,6 +102,8 @@ export const Create = () => {
       <form id="form" onSubmit={submit}>
         {inputDiscordName(setFields)}
         {inputIngameName(setFields)}
+        {selectWeapon(setFields)}
+        {selectTeam(setFields)}
 
         <div class="col-sm-6 text-center">
           <button type="submit" class="btn btn-primary">
