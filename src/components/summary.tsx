@@ -9,6 +9,7 @@ import {
 import { Title } from "@solidjs/meta";
 
 import { AuthContext } from "../context/auth";
+import { MemberWithPoints } from "../models/member";
 import { Query } from "../models/query";
 import { summary } from "../services/summary";
 
@@ -30,13 +31,25 @@ export const List = () => {
   const [options, _] = createSignal<Query>({
     token: auth.user()?.token || "",
   });
-  const [data] = createResource(() => options(), summary);
+  const [data, { mutate }] = createResource(() => options(), summary);
+
+  const sortBy = (key: keyof MemberWithPoints) => () => {
+    const sorted = data()?.sort((a, b) => {
+      if (typeof a[key] !== "string" && typeof b[key] !== "string") {
+        return a[key] - b[key];
+      }
+
+      return String(a[key]).localeCompare(String(b[key]));
+    });
+
+    mutate(sorted);
+  };
 
   return (
     <table class="table table-striped table-hover table-bordered">
       <thead class="sticky-top bg-white p-2">
         <tr>
-          <th>Discord Name</th>
+          <th onClick={sortBy("discord_name")}>Discord Name</th>
           <th>Ingame Name</th>
           <th>Available Points</th>
           <th>Available Points (Archboss)</th>
