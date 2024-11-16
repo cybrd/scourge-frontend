@@ -44,6 +44,8 @@ export const List = () => {
       return String(a[key]).localeCompare(String(b[key]));
     });
 
+    console.log(sorted);
+
     mutate(sorted);
   };
 
@@ -52,7 +54,7 @@ export const List = () => {
       <thead class="sticky-top bg-white p-2">
         <tr>
           <th onClick={sortBy("discord_name")}>Discord Name</th>
-          <th>Ingame Name</th>
+          <th onClick={sortBy("ingame_name")}>Ingame Name</th>
           <th>Available Points</th>
           <th>Available Points (Archboss)</th>
           <th>Total Points</th>
