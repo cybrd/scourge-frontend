@@ -1,6 +1,6 @@
 import { A, Route } from "@solidjs/router";
 import {
-  Index,
+  For,
   ParentComponent,
   createResource,
   createSignal,
@@ -64,21 +64,19 @@ export const List = () => {
         </tr>
       </thead>
       <tbody>
-        <Index each={data()}>
+        <For each={data()}>
           {(item) => (
             <tr>
-              <td>{item().discord_name}</td>
+              <td>{item.discord_name}</td>
               <td>
-                <A href={`/member/${item().id}/activity`}>
-                  {item().ingame_name}
-                </A>
+                <A href={`/member/${item.id}/activity`}>{item.ingame_name}</A>
               </td>
-              <td>{item().available_points}</td>
-              <td>{item().available_archboss_points}</td>
-              <td>{item().total_points}</td>
+              <td>{item.available_points}</td>
+              <td>{item.available_archboss_points}</td>
+              <td>{item.total_points}</td>
             </tr>
           )}
-        </Index>
+        </For>
       </tbody>
     </table>
   );
