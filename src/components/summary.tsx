@@ -88,6 +88,8 @@ export const List = () => {
               <td>
                 <A href={`/member/${item.id}/activity`}>{item.ingame_name}</A>
               </td>
+              <td>{item.weapon}</td>
+              <td>{item.team}</td>
               <td>{item.available_points}</td>
               <td>{item.available_archboss_points}</td>
               <td>{item.total_points}</td>

@@ -8,12 +8,12 @@ import { memberCreate } from "../../services/member";
 
 const selectWeapon = (setFields: SetStoreFunction<Partial<Member>>) => (
   <div class="form-group row p-1">
-    <label for="selectType" class="col-sm-2 form-label text-end">
-      Type
+    <label for="selectWeapon" class="col-sm-2 form-label text-end">
+      Weapon
     </label>
     <div class="col-sm-4">
       <select
-        id="selectType"
+        id="selectWeapon"
         onChange={(e) => setFields("weapon", e.target.value)}
       >
         <option value="">----</option>
@@ -27,12 +27,12 @@ const selectWeapon = (setFields: SetStoreFunction<Partial<Member>>) => (
 
 const selectTeam = (setFields: SetStoreFunction<Partial<Member>>) => (
   <div class="form-group row p-1">
-    <label for="selectType" class="col-sm-2 form-label text-end">
-      Type
+    <label for="selectTeam" class="col-sm-2 form-label text-end">
+      Team
     </label>
     <div class="col-sm-4">
       <select
-        id="selectType"
+        id="selectTeam"
         onChange={(e) => setFields("team", e.target.value)}
       >
         <option value="">----</option>

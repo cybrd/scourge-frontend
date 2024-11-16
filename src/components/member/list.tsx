@@ -57,6 +57,8 @@ export const List = () => {
                     {item().ingame_name}
                   </A>
                 </td>
+                <td>{item().weapon}</td>
+                <td>{item().team}</td>
                 <td>
                   {auth.user()?.username && (
                     <>

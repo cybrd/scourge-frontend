@@ -13,7 +13,7 @@ const selectWeapon = (
 ) => (
   <div class="form-group row p-1">
     <label for="selectWeapon" class="col-sm-2 form-label text-end">
-      Type
+      Weapon
     </label>
     <div class="col-sm-4">
       <select
@@ -39,7 +39,7 @@ const selectTeam = (
 ) => (
   <div class="form-group row p-1">
     <label for="selectTeam" class="col-sm-2 form-label text-end">
-      Type
+      Team
     </label>
     <div class="col-sm-4">
       <select
