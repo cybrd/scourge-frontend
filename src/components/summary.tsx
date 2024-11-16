@@ -37,17 +37,17 @@ export const List = () => {
     <table class="table table-striped table-hover table-bordered">
       <thead class="sticky-top bg-white p-2">
         <tr>
-          <th onClick={sortBy(data(), mutate, "discord_name")}>Discord Name</th>
-          <th onClick={sortBy(data(), mutate, "ingame_name")}>Ingame Name</th>
-          <th onClick={sortBy(data(), mutate, "weapon")}>Weapon</th>
-          <th onClick={sortBy(data(), mutate, "team")}>Team</th>
-          <th onClick={sortBy(data(), mutate, "available_points")}>
+          <th onClick={sortBy(data, mutate, "discord_name")}>Discord Name</th>
+          <th onClick={sortBy(data, mutate, "ingame_name")}>Ingame Name</th>
+          <th onClick={sortBy(data, mutate, "weapon")}>Weapon</th>
+          <th onClick={sortBy(data, mutate, "team")}>Team</th>
+          <th onClick={sortBy(data, mutate, "available_points")}>
             Available Points
           </th>
-          <th onClick={sortBy(data(), mutate, "available_archboss_points")}>
+          <th onClick={sortBy(data, mutate, "available_archboss_points")}>
             Available Points (Archboss)
           </th>
-          <th onClick={sortBy(data(), mutate, "total_points")}>Total Points</th>
+          <th onClick={sortBy(data, mutate, "total_points")}>Total Points</th>
         </tr>
       </thead>
       <tbody>

@@ -43,12 +43,10 @@ export const List = () => {
       <table class="table table-striped table-hover table-bordered">
         <thead class="sticky-top bg-white p-2">
           <tr>
-            <th onClick={sortBy(data(), mutate, "discord_name")}>
-              Discord Name
-            </th>
-            <th onClick={sortBy(data(), mutate, "ingame_name")}>Ingame Name</th>
-            <th onClick={sortBy(data(), mutate, "weapon")}>Weapon</th>
-            <th onClick={sortBy(data(), mutate, "team")}>Team</th>
+            <th onClick={sortBy(data, mutate, "discord_name")}>Discord Name</th>
+            <th onClick={sortBy(data, mutate, "ingame_name")}>Ingame Name</th>
+            <th onClick={sortBy(data, mutate, "weapon")}>Weapon</th>
+            <th onClick={sortBy(data, mutate, "team")}>Team</th>
             <th>-</th>
           </tr>
         </thead>

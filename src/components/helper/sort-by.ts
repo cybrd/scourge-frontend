@@ -1,7 +1,7 @@
-import { Setter } from "solid-js";
+import { Resource, Setter } from "solid-js";
 
 export const sortBy = <T>(
-  data: T[] | undefined,
+  data: Resource<T[] | undefined>,
   mutate: Setter<T[] | undefined>,
   key: Extract<keyof T, string>
 ) => {
@@ -20,7 +20,7 @@ export const sortBy = <T>(
     }
 
     sortKey = key;
-    const sorted = data?.sort((a, b) => {
+    const sorted = data()?.sort((a, b) => {
       if (sortDirection === "ASC") {
         if (typeof a[key] !== "string" && typeof b[key] !== "string") {
           return Number(a[key]) - Number(b[key]);
