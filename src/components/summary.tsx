@@ -33,19 +33,35 @@ export const List = () => {
   });
   const [data, { mutate }] = createResource(() => options(), summary);
 
+  let sortKey = "";
+  let sortDirection = "DESC";
   const sortBy = (key: keyof MemberWithPoints) => () => {
-    console.log("sortBy", key);
+    if (sortKey === key) {
+      if (sortDirection === "DESC") {
+        sortDirection = "ASC";
+      } else {
+        sortDirection = "DESC";
+      }
+    } else {
+      sortDirection = "DESC";
+    }
 
+    sortKey = key;
     const sorted = data()?.sort((a, b) => {
-      if (typeof a[key] !== "string" && typeof b[key] !== "string") {
-        return a[key] - b[key];
+      if (sortDirection === "ASC") {
+        if (typeof a[key] !== "string" && typeof b[key] !== "string") {
+          return a[key] - b[key];
+        }
+
+        return String(a[key]).localeCompare(String(b[key]));
       }
 
-      return String(a[key]).localeCompare(String(b[key]));
-    });
+      if (typeof a[key] !== "string" && typeof b[key] !== "string") {
+        return b[key] - a[key];
+      }
 
-    console.log(sorted);
-    console.log(data());
+      return String(b[key]).localeCompare(String(a[key]));
+    });
 
     mutate([]);
     mutate(sorted);
