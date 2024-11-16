@@ -47,6 +47,7 @@ export const List = () => {
     console.log(sorted);
     console.log(data());
 
+    mutate([]);
     mutate(sorted);
   };
 
