@@ -9,8 +9,8 @@ import {
 import { Title } from "@solidjs/meta";
 
 import { AuthContext } from "../context/auth";
-import { MemberWithPoints } from "../models/member";
 import { Query } from "../models/query";
+import { sortBy } from "./helper/sort-by";
 import { summary } from "../services/summary";
 
 export const Summary = () => (
@@ -33,51 +33,21 @@ export const List = () => {
   });
   const [data, { mutate }] = createResource(() => options(), summary);
 
-  let sortKey = "";
-  let sortDirection = "DESC";
-  const sortBy = (key: keyof MemberWithPoints) => () => {
-    if (sortKey === key) {
-      if (sortDirection === "DESC") {
-        sortDirection = "ASC";
-      } else {
-        sortDirection = "DESC";
-      }
-    } else {
-      sortDirection = "DESC";
-    }
-
-    sortKey = key;
-    const sorted = data()?.sort((a, b) => {
-      if (sortDirection === "ASC") {
-        if (typeof a[key] !== "string" && typeof b[key] !== "string") {
-          return a[key] - b[key];
-        }
-
-        return String(a[key]).localeCompare(String(b[key]));
-      }
-
-      if (typeof a[key] !== "string" && typeof b[key] !== "string") {
-        return b[key] - a[key];
-      }
-
-      return String(b[key]).localeCompare(String(a[key]));
-    });
-
-    mutate([]);
-    mutate(sorted);
-  };
-
   return (
     <table class="table table-striped table-hover table-bordered">
       <thead class="sticky-top bg-white p-2">
         <tr>
-          <th onClick={sortBy("discord_name")}>Discord Name</th>
-          <th onClick={sortBy("ingame_name")}>Ingame Name</th>
-          <th onClick={sortBy("available_points")}>Available Points</th>
-          <th onClick={sortBy("available_archboss_points")}>
+          <th onClick={sortBy(data(), mutate, "discord_name")}>Discord Name</th>
+          <th onClick={sortBy(data(), mutate, "ingame_name")}>Ingame Name</th>
+          <th onClick={sortBy(data(), mutate, "weapon")}>Weapon</th>
+          <th onClick={sortBy(data(), mutate, "team")}>Team</th>
+          <th onClick={sortBy(data(), mutate, "available_points")}>
+            Available Points
+          </th>
+          <th onClick={sortBy(data(), mutate, "available_archboss_points")}>
             Available Points (Archboss)
           </th>
-          <th onClick={sortBy("total_points")}>Total Points</th>
+          <th onClick={sortBy(data(), mutate, "total_points")}>Total Points</th>
         </tr>
       </thead>
       <tbody>
