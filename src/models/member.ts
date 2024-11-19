@@ -36,4 +36,4 @@ export const memberWeaponList = [
   "Dagger / Crossbow",
 ] as const;
 
-export const memberTeamList = ["1", "2", "3"] as const;
+export const memberTeamList = ["1", "2", "3", "4"] as const;
