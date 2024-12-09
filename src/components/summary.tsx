@@ -8,6 +8,7 @@ import {
 } from "solid-js";
 import { Title } from "@solidjs/meta";
 
+import { TEN, ZERO } from "../constants";
 import { AuthContext } from "../context/auth";
 import { Query } from "../models/query";
 import { sortBy } from "./helper/sort-by";
@@ -68,7 +69,7 @@ export const List = () => {
               <td>{item.available_archboss_points}</td>
               <td>{item.total_points}</td>
               <td>{item.total_events}</td>
-              <td>{item.first_activity_date}</td>
+              <td>{item.first_activity_date.substring(ZERO, TEN)}</td>
             </tr>
           )}
         </For>
