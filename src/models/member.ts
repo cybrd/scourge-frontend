@@ -10,6 +10,8 @@ export type MemberWithPoints = Member & {
   available_points: number;
   available_archboss_points: number;
   total_points: number;
+  total_events: number;
+  first_activity_date: string;
 };
 
 export const memberWeaponList = [

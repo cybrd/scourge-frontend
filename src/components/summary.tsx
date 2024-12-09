@@ -48,6 +48,10 @@ export const List = () => {
             Available Points (Archboss)
           </th>
           <th onClick={sortBy(data, mutate, "total_points")}>Total Points</th>
+          <th onClick={sortBy(data, mutate, "total_events")}>Total Events</th>
+          <th onClick={sortBy(data, mutate, "first_activity_date")}>
+            First Activity Date
+          </th>
         </tr>
       </thead>
       <tbody>
@@ -63,6 +67,8 @@ export const List = () => {
               <td>{item.available_points}</td>
               <td>{item.available_archboss_points}</td>
               <td>{item.total_points}</td>
+              <td>{item.total_events}</td>
+              <td>{item.first_activity_date}</td>
             </tr>
           )}
         </For>
